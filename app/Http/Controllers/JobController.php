@@ -14,7 +14,8 @@ class JobController extends Controller
      */
     public function index()
     {
-        $data['data']=DB::table('jobs')->get();
+        $username=session()->get('data');
+        $data['data']=DB::table('jobs')->where (['userEmail'=>$username])->get();
         if(count($data)>0)
         {
             return view('all_job',$data);
@@ -23,10 +24,23 @@ class JobController extends Controller
         {
             return view('all_job');
         }
+    }
 
+    public function index1()
+    {
+        $data['data']=DB::table('jobs')->get();
+        if(count($data)>0)
+        {
+            return view('pending_job',$data);
+        }
+        else
+        {
+            return view('pending_job');
+        }
         
     }
 
+   
      public function job_post()
     {
         return view('new_job_post');
@@ -46,6 +60,7 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+        $username=session()->get('data');
         $job = new Job();
         $job->companyName=$request->input('companyName');
         $job->jobTitle=$request->input('jobTitle');
@@ -57,6 +72,7 @@ class JobController extends Controller
         $job->experience=$request->input('experience');
         $job->salary=$request->input('salary');
         $job->email=$request->input('email');
+        $job->userEmail=$username;
         $job->description=$request->input('description');
         
         $job->save();
@@ -104,8 +120,33 @@ class JobController extends Controller
      * @param  \App\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy($id)
     {
-        //
+        $job=Job :: find($id);
+        $job->delete();
+        $username=session()->get('data');
+        $data['data']=DB::table('jobs')->where (['userEmail'=>$username])->get();
+        if(count($data)>0)
+        {
+            return view('all_job',$data);
+        }
+        else
+        {
+            return view('all_job');
+        }
+    }
+    public function destroy1($id)
+    {
+         $job=Job :: find($id);
+        $job->delete();
+        $data['data']=DB::table('jobs')->get();
+        if(count($data)>0)
+        {
+            return view('pending_job',$data);
+        }
+        else
+        {
+            return view('pending_job');
+        }
     }
 }

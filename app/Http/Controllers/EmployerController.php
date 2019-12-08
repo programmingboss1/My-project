@@ -12,7 +12,15 @@ class EmployerController extends Controller
 
     public function index()
     {
-        //
+        $data['data']=DB::table('employers')->get();
+        if(count($data)>0)
+        {
+            return view('admin_see_employers',$data);
+        }
+        else
+        {
+            return view('admin_see_employers');
+        }
     }
 
 
@@ -23,6 +31,7 @@ class EmployerController extends Controller
         $loginData=DB :: table('employers')->where (['email'=>$userName,'password'=>$password])->get();
         if (count($loginData)>0)
         {
+            $request->session()->put('data',$userName);
             echo("Log in succesfully");
             return view('employerHomepage');
         }
@@ -104,7 +113,9 @@ class EmployerController extends Controller
  
     public function show(Employer $employer)
     {
-        return view('employerInfo');
+        $data=session()->get('data');
+        $userInfo['userInfo']=DB :: table('employers')->where (['email'=>$data])->get();
+        return view('employerInfo',$userInfo);
     }
 
  
@@ -114,14 +125,37 @@ class EmployerController extends Controller
     }
 
  
-    public function update(Request $request, Employer $employer)
+    public function update(Request $request)
     {
-        //
+        /*$firstName=$request->input('first_name');
+        $lastName=$request->input('last_name');
+        $userName=$request->input('user_name');
+        $email=$request->input('email');
+        $DOB=$request->input('DOB');
+        $phone=$request->input('phone');
+        $companyName=$request->input('company_name');*/
+        return view ('employerHomepage');
+        
     }
 
    
     public function destroy(Employer $employer)
     {
         //
+    }
+
+    public function destroy1($id)
+    {
+         $employee=Employer :: find($id);
+        $employee->delete();
+        $data['data']=DB::table('employers')->get();
+        if(count($data)>0)
+        {
+            return view('admin_see_employers',$data);
+        }
+        else
+        {
+            return view('admin_see_employers');
+        }
     }
 }

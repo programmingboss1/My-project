@@ -5,7 +5,7 @@
 }
 header{
 	background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url(images.jpg);
-	height:80vh;
+	height:30vh;
 	background-size: cover;
 	background-position: center;
 }
@@ -42,7 +42,7 @@ header{
 }
 .text{
 	position:absolute;
-	top:35%;
+	top:20%;
 	left:50%;
 	transform: translate(-50%,-50%);
 }
@@ -72,7 +72,6 @@ header{
 }
 .footer{
 	padding:20px;
-	margin-top: 20px;
 	background: gray;
 	text-align:right;
 }

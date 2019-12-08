@@ -66,6 +66,9 @@ class PageControl extends Controller
     }
 
 
-   
+   public  function home1()
+    {
+        return view('employerHomepage');
+    }
 }
 

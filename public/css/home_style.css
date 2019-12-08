@@ -56,15 +56,17 @@ header{
 }
 .left {
     padding:50px;
+    padding-left: 120px;
+    padding-right: 100px;
     padding-bottom:50px;
 	background-color:LightGray;
 	border:1px solid #000;
 	}
 .right {
     padding-top:20px;
-    padding-left: 50px;
+    padding-left: 100px;
     padding-bottom: 20px;
-    padding-right: 10px;
+    padding-right: 120px;
 	background-color:Violet;
 	border:1px solid #000;
 }
@@ -101,8 +103,9 @@ header{
 .style ul li:hover .logIn_Dropdown{
 	display:block;
 	position:absolute;
-	margin-top:15px;
+	margin-top:5px;
 	margin-left:-15px;
+
 	
 }
 .style ul li:hover .logIn_Dropdown ul{
@@ -132,7 +135,7 @@ header{
 }
 .footer{
 	padding:20px;
-	margin-top: 20px;
+	
 	background: gray;
 	text-align:right;
 }

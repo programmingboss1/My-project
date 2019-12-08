@@ -42,19 +42,20 @@
           <div class="tab-content">
             <div class="tab-pane active" id="home">
                 <hr>
-                  <form class="form" action="##" method="post" id="registrationForm">
+                  <form action="companyInfo" method="post">
+                    {{csrf_field()}}
                       <div class="form-group">
                           
                           <div class="col-xs-6">
                               <label for="first_name"><h4>Company name</h4></label>
-                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                              <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Enter company name">
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
                             <label for="last_name"><h4>Company Owner name</h4></label>
-                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                              <input type="text" class="form-control" name="owner_name" id="owner_name" placeholder="Enter company owner name">
                           </div>
                       </div>
           
@@ -62,14 +63,14 @@
                           
                           <div class="col-xs-6">
                               <label for="phone"><h4>Location</h4></label>
-                              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                              <input type="text" class="form-control" name="area" id="area" placeholder="enter company area">
                           </div>
                       </div>
           
                       <div class="form-group">
                           <div class="col-xs-6">
                              <label for="mobile"><h4>Phone</h4></label>
-                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter mobile number">
                           </div>
                       </div>
                       <div class="form-group">
@@ -83,7 +84,7 @@
                           
                           <div class="col-xs-6">
                               <label for="email"><h4>Email</h4></label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com">
                           </div>
                       </div>
                       

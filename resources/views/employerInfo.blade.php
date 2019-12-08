@@ -1,5 +1,16 @@
-@extends('layout.employee')
+
+<?php 
+
+if (session()->get('data')==null) {
+  return view('employerLogin');
+  # code...
+}
+ ?>
+ @extends('layout.employee')
+
 @section('body')
+
+
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -25,11 +36,12 @@
     	
     </div>
     <div class="row">
-  		<div class="col-sm-3"><!--left col-->
+  		
+         <div class="col-sm-3"><!--left col-->
               
 
       <div class="text-center">
-        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+        <img height="300px" width="200px" src="{{asset('images/employer.JPG')}}" class="avatar img-circle img-thumbnail" alt="avatar">
         <h6>Upload a different photo...</h6>
         <input type="file" class="text-center center-block file-upload">
       </div></hr><br>
@@ -37,11 +49,12 @@
           <div class="panel panel-default">
             <div class="panel-heading">Social Media</div>
             <div class="panel-body">
-            	<i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+              <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
             </div>
           </div>
           
-        </div><!--/col-3-->
+        </div><!--/col-3-->     
+
     	<div class="col-sm-9">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
@@ -51,19 +64,21 @@
           <div class="tab-content">
             <div class="tab-pane active" id="home">
                 <hr>
-                  <form class="form" action="##" method="post" id="registrationForm">
+                  <form class="form" action="/updateEmployee" method="post">
+                    @foreach($userInfo as $value)
+                    @csrf
                       <div class="form-group">
                           
                           <div class="col-xs-6">
                               <label for="first_name"><h4>First name</h4></label>
-                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder={{ $value->firstName }}>
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
                             <label for="last_name"><h4>Last name</h4></label>
-                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder={{ $value->lastName }} title="enter your last name if any.">
                           </div>
                       </div>
           
@@ -71,46 +86,47 @@
                           
                           <div class="col-xs-6">
                               <label for="phone"><h4>User Name</h4></label>
-                              <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                              <input type="text" class="form-control" name="user_name" id="user_name" placeholder={{ $value->userName }}>
                           </div>
                       </div>
           
                       <div class="form-group">
                           <div class="col-xs-6">
-                             <label for="mobile"><h4>Email</h4></label>
-                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                             <label for="email"><h4>Email</h4></label>
+                              <input type="email" class="form-control" name="email" id="mobile" placeholder={{ $value->email }}>
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="email"><h4>Date Of Birth</h4></label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                              <label for="DOB"><h4>Date Of Birth</h4></label>
+                              <input type="text" class="form-control" name="DOB" id="DOB" placeholder={{ $value->DOB }} >
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="email"><h4>Phone</h4></label>
-                              <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                              <label for="phone"><h4>Phone</h4></label>
+                              <input type="phone" class="form-control" id="phone" placeholder={{ $value->phone }}>
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="password"><h4>Company Name</h4></label>
-                              <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+                              <label for="company name"><h4>Company Name</h4></label>
+                              <input type="text" class="form-control" name="company_name" id="company_name" placeholder={{ $value->companyName }}>
                           </div>
                       </div>
-                      
+                      @endforeach
                       <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
-                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                               	<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                              	<button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Update</button>
                             </div>
                       </div>
+
               	</form>
+
               
               <hr>
               
@@ -122,5 +138,5 @@
 
         </div><!--/col-9-->
     </div><!--/row-->
-                                                      
+                                                
 @endsection
